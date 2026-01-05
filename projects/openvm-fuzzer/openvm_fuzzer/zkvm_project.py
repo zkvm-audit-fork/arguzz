@@ -218,8 +218,25 @@ fn main() {
         for e in self.circuit_candidate.inputs:
             buffer.write(f"    let {e.name} = args.{e.name};\n")
 
-        buffer.write(
-            """
+        if self.commit_or_branch == "4285a4f974db90ce11bd21c0642d059cbb8975d0":
+            buffer.write(
+                """
+    let sdk = Sdk;
+
+    let guest_opts = GuestOptions::default();
+    let target_path = "guest";
+    let elf = sdk
+        .build(guest_opts, target_path, &Default::default())
+        .expect("guest build");
+
+    let exe = sdk.transpile(elf, vm_config.transpiler()).expect("guest transpile");
+
+    let mut stdin = StdIn::default();
+"""
+            )
+        else:
+            buffer.write(
+                """
     let sdk = Sdk::new();
 
     let guest_opts = GuestOptions::default();
@@ -236,7 +253,7 @@ fn main() {
 
     let mut stdin = StdIn::default();
 """
-        )
+            )
 
         for circuit in self.circuits:
             buffer.write(f"    // -- {circuit.name} --\n")

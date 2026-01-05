@@ -7,6 +7,7 @@ from openvm_fuzzer.kinds import InjectionKind, InstrKind
 OPENVM_AVAILABLE_COMMITS_OR_BRANCHES = [
     "main",
     "ca36de3803213da664b03d111801ab903d55e360",
+    "4285a4f974db90ce11bd21c0642d059cbb8975d0",
 ]
 OPENVM_ZKVM_GIT_REPOSITORY = "https://github.com/DanielHoffmann91/openvm.git"
 RUST_TOOLCHAIN_VERSION = "nightly-2025-02-14"
